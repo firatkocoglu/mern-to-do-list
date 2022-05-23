@@ -4,8 +4,8 @@ const TaskSchema = new mongoose.Schema(
   {
     task: {
       type: String,
-      required: true,
-      maxlength: 200,
+      required: [true, 'No tasks typed!'],
+      maxlength: 100,
     },
   },
   { timestamps: true }
