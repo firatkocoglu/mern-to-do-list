@@ -1,21 +1,23 @@
 const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
   firstname: {
     type: String,
-    default: '',
+    required: [true, 'Please enter your first name.'],
   },
-  lastname: {
+  username: {
     type: String,
-    default: '',
+    required: [true, 'Please enter an username.'],
   },
-  admin: {
-    type: Boolean,
-    default: false,
+  password: {
+    type: String,
+    required: [true, 'Please enter a password.'],
+    min: 6,
   },
 });
 
-User.plugin(passportLocalMongoose);
+const User = mongoose.model('User', UserSchema);
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = User;
